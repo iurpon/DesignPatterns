@@ -1,16 +1,13 @@
 package ru.trandefil.hw4.decorator;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import ru.trandefil.hw4.MailServerMock;
+import ru.trandefil.hw4.Message;
+import ru.trandefil.hw4.MessageExchanger;
+import ru.trandefil.hw4.utils.MessageExchangerUtils;
 
 public class IncognitoMessageExchanger implements MessageExchanger {
 
     private MessageExchanger messageExchanger;
-
-    private Map<String, String> hideNamesStore = new HashMap<>();
-
-    private Random random = new Random();
 
     public IncognitoMessageExchanger(MessageExchanger messageExchanger) {
         this.messageExchanger = messageExchanger;
@@ -18,21 +15,14 @@ public class IncognitoMessageExchanger implements MessageExchanger {
 
     @Override
     public void sendMessage(Message message) {
-        message.setAuthor(hideName(message.getAuthor()));
-        messageExchanger.sendMessage(message);
+        messageExchanger.sendMessage(MessageExchangerUtils.hideAuthorName(message));
     }
 
     @Override
     public Message getMessage(String authorName) {
-        Message message = messageExchanger.getMessage(hideName(authorName));
+        Message message = messageExchanger.getMessage(MessageExchangerUtils.hideAuthorName(authorName));
         message.setAuthor(authorName);
         return message;
     }
 
-    private String hideName(String name) {
-        if (!hideNamesStore.containsKey(name)) {
-            hideNamesStore.put(name, String.valueOf(random.nextInt(1000)));
-        }
-        return hideNamesStore.get(name);
-    }
 }

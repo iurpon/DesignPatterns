@@ -1,4 +1,4 @@
-package ru.trandefil.hw4.decorator;
+package ru.trandefil.hw4;
 
 public class Message {
     private String author;
