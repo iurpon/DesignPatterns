@@ -59,8 +59,14 @@ public class OrmAdapter implements CommonOrm<IDbEntity> {
         if (isFirstOrm()) {
             IFirstOrm<IDbEntity> iFirstOrm = (IFirstOrm) customOrm;
             return iFirstOrm.read(id.intValue());
+        }else{
+            return ((ISecondOrm) customOrm).getContext().getUsers()
+                    .stream()
+                    .filter(entity -> id.equals(entity.getId()))
+                    .findFirst()
+                    .get();
         }
-        return null;
+
     }
 
     private boolean isFirstOrm() {
