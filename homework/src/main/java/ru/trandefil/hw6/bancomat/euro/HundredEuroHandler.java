@@ -11,14 +11,6 @@ public class HundredEuroHandler extends EuroHandlerBase {
     }
 
     @Override
-    public boolean validate(String banknote) {
-        if (banknote.equals("10 Рублей")) {
-            return true;
-        }
-        return super.validate(banknote);
-    }
-
-    @Override
     protected int getValue() {
         return value;
     }

@@ -4,18 +4,19 @@ import ru.trandefil.hw6.bancomat.banknote.BanknoteHandler;
 
 public class TwentyEuroHandler extends EuroHandlerBase {
 
-    protected int value = 20;
+    private int value = 20;
 
     public TwentyEuroHandler(BanknoteHandler nextHandler) {
         super(nextHandler);
     }
 
     @Override
-    public boolean validate(String banknote) {
-        if (banknote.equals("10 Рублей")) {
-            return true;
+    public boolean validate(int sum) {
+        if(sum % value != 0){
+            return false;
         }
-        return super.validate(banknote);
+        result.append(value).append("*").append(sum/ value);
+        return true;
     }
 
     @Override

@@ -9,11 +9,13 @@ public abstract class EuroHandlerBase extends BanknoteHandler {
     }
 
     @Override
-    public boolean validate(String banknote) {
-        if (banknote.equals(String.valueOf(getValue()))) {
-            return true;
+    public boolean validate(int sum) {
+        if(sum < 0){
+            return false;
         }
-        return super.validate(banknote);
+        int totalBanknotes = random.nextInt(sum/getValue());
+        result.append(getValue()).append("*").append(totalBanknotes).append(" + ");
+        return super.validate(sum - totalBanknotes*getValue());
     }
 
     protected abstract int getValue();

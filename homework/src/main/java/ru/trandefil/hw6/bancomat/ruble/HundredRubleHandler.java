@@ -10,18 +10,19 @@ import ru.trandefil.hw6.bancomat.banknote.BanknoteHandler;
  */
 public class HundredRubleHandler extends RubleHandlerBase {
 
-    protected int value = 100;
+    private int value = 100;
 
     public HundredRubleHandler(BanknoteHandler nextHandler) {
         super(nextHandler);
     }
 
     @Override
-    public boolean validate(String banknote) {
-        if (banknote.equals("10 Рублей")) {
-            return true;
+    public boolean validate(int sum) {
+        if(sum % value != 0){
+            return false;
         }
-        return super.validate(banknote);
+        result.append(value).append("*").append(sum/ value);
+        return true;
     }
 
     @Override

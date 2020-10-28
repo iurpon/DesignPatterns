@@ -10,7 +10,7 @@ import ru.trandefil.hw6.bancomat.banknote.BanknoteHandler;
  */
 public class HundredDollarHandler extends DollarHandlerBase {
 
-    protected int value = 100;
+    private int value = 100;
 
     public HundredDollarHandler(BanknoteHandler nextHandler) {
         super(nextHandler);
